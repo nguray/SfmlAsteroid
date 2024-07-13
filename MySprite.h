@@ -25,6 +25,10 @@ public:
     void setAngle(float a);
     float getAngle();
     void draw(sf::RenderWindow &window);
+    void accelerate();
+    void idle();
+    void decelerate();
+    void updatePos();
 
 
 };

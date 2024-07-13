@@ -13,10 +13,19 @@ int main()
     int         iTriggerDelay = 0;
     std::list<Bullet *> list_bullets;
 
-    MySprite    ship(400.0,300.0,0.0);
+
+    float       speedA = 0.0f;
+    float       speed = 0.0f;
 
     auto window = sf::RenderWindow{ { 800u, 600u }, "CMake SFML Project!!" };
     window.setFramerateLimit(144);
+
+    int screenWidth = window.getSize().x;
+    int screenHeight = window.getSize().y;
+
+    int shipPosX = (screenWidth - 32)/2;
+    int shipPosY = screenHeight - 3*32;
+    MySprite    ship(shipPosX, shipPosY, 0.0);
 
     while (window.isOpen())
     {
@@ -30,13 +39,13 @@ int main()
                 if (event.key.code==sf::Keyboard::Escape){
                     window.close();
                 }else if (event.key.code == sf::Keyboard::Left){
-
+                    speedA = -1.0f;
                 }else if (event.key.code == sf::Keyboard::Right){
-
+                    speedA = 1.0f;
                 }else if (event.key.code == sf::Keyboard::Up){
-
+                    speed = 1.0f;
                 }else if (event.key.code == sf::Keyboard::Down){
-
+                    speed = -1.0f;
                 }else if (event.key.code == sf::Keyboard::Space){
                     if (!fTrigger){
                         fTrigger = true;
@@ -48,11 +57,11 @@ int main()
             case sf::Event::KeyReleased:
                 if ((event.key.code == sf::Keyboard::Left)||
                     (event.key.code == sf::Keyboard::Right)){
-                    //speedA = 0;
+                    speedA = 0;
                 }
                 if ((event.key.code == sf::Keyboard::Up)||
                     (event.key.code == sf::Keyboard::Down)){
-                    //speed = 0.0f;
+                    speed = 0.0f;
                 }
                 if (event.key.code == sf::Keyboard::Space){
                     fTrigger = false;
@@ -63,6 +72,33 @@ int main()
                 break;
             }
         }
+
+        if (speedA!=0.0f){
+            float a = ship.getAngle() + speedA;
+            ship.setAngle(a);
+        }
+
+        if (speed==0.0f){
+            ship.idle();
+        }else{
+            if (speed>0.0f){
+                ship.accelerate();
+            }else{
+                ship.decelerate();
+            }
+        }
+
+        ship.updatePos();
+
+        sf::Vector2f p = ship.m_pos;
+        if ((p.x<0)||(p.x>screenWidth)){
+            p.x = screenWidth - p.x;
+        }
+        if ((p.y<0)||(p.y>screenHeight)){
+            p.y = screenHeight - p.y;
+        }
+        ship.m_pos = p;
+
 
         window.clear();
 
