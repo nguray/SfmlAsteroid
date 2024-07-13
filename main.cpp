@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <list>
+#include <filesystem>
 #include "Bullet.h"
 #include "MySprite.h"
 
@@ -29,6 +30,14 @@ int main()
 
     auto window = sf::RenderWindow{ { 800u, 600u }, "CMake SFML Project!!" };
     window.setFramerateLimit(144);
+
+    sf::SoundBuffer buffer;
+    std::filesystem::path resPath{".."};
+    buffer.loadFromFile(resPath/"344276__nsstudios__laser3.wav");
+    sf::Sound soundLaser;
+    soundLaser.setBuffer(buffer);
+    soundLaser.setVolume(50.0);
+
 
     int screenWidth = window.getSize().x;
     int screenHeight = window.getSize().y;
@@ -120,9 +129,9 @@ int main()
                 float angle = ship.getAngle();
                 sf::Vector2f n = ship.m_n;
                 sf::Vector2f pos = ship.m_pos;
-                if (pBullet = new Bullet(pos.x, pos.y, n.x,n.y)){
+                if ((pBullet = new Bullet(pos.x, pos.y, n.x,n.y))!=NULL){
                     list_bullets.push_back(pBullet);
-                    //soundLaser.play();
+                    soundLaser.play();
                     //printf(">>>%d %d : %d\n",alienPosX,alienPosY,iTriggerDelay);
                 }
             }
