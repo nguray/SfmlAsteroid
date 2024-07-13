@@ -6,6 +6,15 @@
 #include "Bullet.h"
 #include "MySprite.h"
 
+
+bool PtInWindow(float left,float top,float right,float bottom, float x, float y)
+{
+    return ((x>left)&&(x<right)&&(y>top)&&(y<bottom));
+
+}
+
+bool is_deleted(const Bullet *b) { return (b->m_f_deleted==true); }
+
 int main()
 {
 
@@ -16,6 +25,7 @@ int main()
 
     float       speedA = 0.0f;
     float       speed = 0.0f;
+    Bullet      *pBullet = NULL;
 
     auto window = sf::RenderWindow{ { 800u, 600u }, "CMake SFML Project!!" };
     window.setFramerateLimit(144);
@@ -29,6 +39,12 @@ int main()
 
     while (window.isOpen())
     {
+
+        //-------------------------------------------
+        if (fTrigger){
+            iTriggerDelay++;
+        }
+
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
             switch(event.type){
@@ -99,11 +115,51 @@ int main()
         }
         ship.m_pos = p;
 
+        if (fTrigger){
+            if ((iTriggerDelay%24)==0){
+                float angle = ship.getAngle();
+                sf::Vector2f n = ship.m_n;
+                sf::Vector2f pos = ship.m_pos;
+                if (pBullet = new Bullet(pos.x, pos.y, n.x,n.y)){
+                    list_bullets.push_back(pBullet);
+                    //soundLaser.play();
+                    //printf(">>>%d %d : %d\n",alienPosX,alienPosY,iTriggerDelay);
+                }
+            }
+
+        }
+
+        //-- Update bullets positions
+        for (auto pBullet : list_bullets){
+            if (PtInWindow(10,10,screenWidth-10,screenHeight, pBullet->m_pos.x, pBullet->m_pos.y)){
+                //-- In Windows compute new position
+                pBullet->updatePos();
+            }else{
+                //-- Out off window => Mark as depreciate
+                pBullet->m_f_deleted = true;
+            }
+        }
+
+        //-- Remove depreciate bullets
+        list_bullets.remove_if (is_deleted);
 
         window.clear();
 
         ship.draw(window);
 
+        for (auto pBullet : list_bullets){
+            pBullet->draw(window);
+        }
+
         window.display();
     }
+
+    //-- Free remaining bullets
+    for (auto pBullet : list_bullets){
+        delete pBullet;
+    }
+    list_bullets.clear();
+
+    return 0;
+
 }
