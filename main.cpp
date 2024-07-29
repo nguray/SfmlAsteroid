@@ -46,8 +46,17 @@ int main()
     int shipPosY = screenHeight - 3*32;
     MySprite    ship(shipPosX, shipPosY, 0.0);
 
+    sf::Clock clock;
+    sf::Time elapsed = clock.restart();
+
     while (window.isOpen())
     {
+        elapsed = clock.getElapsedTime();
+        if (elapsed.asMilliseconds()<10){
+            continue;
+        }else{
+            sf::Time elapsed = clock.restart();
+        }
 
         //-------------------------------------------
         if (fTrigger){
@@ -124,6 +133,9 @@ int main()
         }
         ship.m_pos = p;
 
+        ship.createMask();
+        ship.createMaskRect();
+
         if (fTrigger){
             if ((iTriggerDelay%24)==0){
                 float angle = ship.getAngle();
@@ -155,6 +167,8 @@ int main()
         window.clear();
 
         ship.draw(window);
+        ship.drawReducedMaskRect(window);
+        //ship.drawMaskRect(window);
 
         for (auto pBullet : list_bullets){
             pBullet->draw(window);
