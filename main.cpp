@@ -2,8 +2,10 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <math.h>
 #include <list>
 #include <filesystem>
+#include "Rock.h"
 #include "Bullet.h"
 #include "MySprite.h"
 
@@ -16,6 +18,27 @@ bool PtInWindow(float left,float top,float right,float bottom, float x, float y)
 
 bool is_deleted(const Bullet *b) { return (b->m_f_deleted==true); }
 
+int RandomInt(int a, int b) 
+{
+	int diff = b - a + 1;
+	int r = rand() % diff;
+	return a + r;
+}
+
+void bounceScreenLimits( int left, int top, int right, int bottom, Rock *pRock)
+{
+    //------------------------------------------
+    if ((pRock->left()<=left)||(pRock->right()>=right)){
+        pRock->m_v.x = -pRock->m_v.x;    
+    }
+
+    if ((pRock->top()<=top)||(pRock->bottom()>=bottom)){
+        pRock->m_v.y = -pRock->m_v.y;    
+    }
+
+
+}
+
 int main()
 {
 
@@ -27,6 +50,11 @@ int main()
     float       speedA = 0.0f;
     float       speed = 0.0f;
     Bullet      *pBullet = NULL;
+
+    Rock        *pRock1 = NULL;
+    Rock        *pRock2 = NULL;
+
+    srand(time(NULL));
 
     auto window = sf::RenderWindow{ { 800u, 600u }, "CMake SFML Project!!" };
     window.setFramerateLimit(144);
@@ -48,6 +76,17 @@ int main()
 
     sf::Clock clock;
     sf::Time elapsed = clock.restart();
+
+    float a = (float) RandomInt(0, 359);
+    float vx = 2.0*cos(a*M_PI/180.0);
+    float vy = 2.0*sin(a*M_PI/180.0);
+    pRock1 = new Rock( 256.0, 256.0, vx, vy, 10.0);
+
+    a = (float) RandomInt(0, 359);
+    vx = 2.4*cos(a*M_PI/180.0);
+    vy = 2.4*sin(a*M_PI/180.0);
+    pRock2 = new Rock( 256.0, 256.0, vx, vy, 15.0);
+
 
     while (window.isOpen())
     {
@@ -85,7 +124,15 @@ int main()
                         fTrigger = true;
                         iTriggerDelay = 0;
                     }
-
+                }else if (event.key.code == sf::Keyboard::V){
+                    a = (float) RandomInt(0, 359);
+                    vx = 2.4*cos(a*M_PI/180.0);
+                    vy = 2.4*sin(a*M_PI/180.0);
+                    pRock1->setVelocity( vx, vy);
+                    a = (float) RandomInt(0, 359);
+                    vx = 2.4*cos(a*M_PI/180.0);
+                    vy = 2.4*sin(a*M_PI/180.0);
+                    pRock2->setVelocity( vx, vy);
                 }
                 break;
             case sf::Event::KeyReleased:
@@ -136,6 +183,12 @@ int main()
         ship.createMask();
         ship.createMaskRect();
 
+        pRock1->updatePosition();
+        bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock1);
+
+        pRock2->updatePosition();
+        bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock2);
+
         if (fTrigger){
             if ((iTriggerDelay%24)==0){
                 float angle = ship.getAngle();
@@ -174,6 +227,11 @@ int main()
             pBullet->draw(window);
         }
 
+
+        pRock1->draw(window);
+        pRock2->draw(window);
+
+
         window.display();
     }
 
@@ -182,6 +240,14 @@ int main()
         delete pBullet;
     }
     list_bullets.clear();
+
+    if (pRock1){
+        delete pRock1;
+    }
+
+    if (pRock2){
+        delete pRock2;
+    }
 
     return 0;
 

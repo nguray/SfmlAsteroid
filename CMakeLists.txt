@@ -4,6 +4,7 @@ project(sfmlAsteroid VERSION 0.1 LANGUAGES CXX)
 
 set(PROJECT_SOURCES
         main.cpp
+        Rock.h Rock.cpp
         Bullet.h Bullet.cpp
         MySprite.h MySprite.cpp
 )
