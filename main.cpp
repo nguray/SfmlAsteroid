@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <cmath>
 #include <math.h>
 #include <list>
 #include <filesystem>
@@ -37,6 +39,20 @@ void bounceScreenLimits( int left, int top, int right, int bottom, Rock *pRock)
     }
 
 
+}
+
+void normalizeVector(sf::Vector2f &v)
+{
+    //-----------------------------------
+    float n = sqrt(v.x*v.x+v.y*v.y);
+    v.x /= n;
+    v.y /= n;
+}
+
+sf::Vector2f computeNormal(sf::Vector2f v)
+{
+    //-----------------------------------
+    return sf::Vector2f(v.y,-v.x);
 }
 
 int main()
@@ -78,13 +94,13 @@ int main()
     sf::Time elapsed = clock.restart();
 
     float a = (float) RandomInt(0, 359);
-    float vx = 2.0*cos(a*M_PI/180.0);
-    float vy = 2.0*sin(a*M_PI/180.0);
+    float vx = 1.8*cos(a*M_PI/180.0);
+    float vy = 1.8*sin(a*M_PI/180.0);
     pRock1 = new Rock( 256.0, 256.0, vx, vy, 10.0);
 
     a = (float) RandomInt(0, 359);
-    vx = 2.4*cos(a*M_PI/180.0);
-    vy = 2.4*sin(a*M_PI/180.0);
+    vx = 2.2*cos(a*M_PI/180.0);
+    vy = 2.2*sin(a*M_PI/180.0);
     pRock2 = new Rock( 256.0, 256.0, vx, vy, 15.0);
 
 
@@ -185,9 +201,11 @@ int main()
 
         pRock1->updatePosition();
         bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock1);
+        pRock1->updateUnitVectors();
 
         pRock2->updatePosition();
         bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock2);
+        pRock2->updateUnitVectors();
 
         if (fTrigger){
             if ((iTriggerDelay%24)==0){
