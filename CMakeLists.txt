@@ -1,3 +1,4 @@
+#include "RVector.h"
 cmake_minimum_required(VERSION 3.25)
 
 project(sfmlAsteroid VERSION 0.1 LANGUAGES CXX)
@@ -7,6 +8,7 @@ set(PROJECT_SOURCES
         Rock.h Rock.cpp
         Bullet.h Bullet.cpp
         MySprite.h MySprite.cpp
+        RVector.h RVector.cpp
 )
 
 add_executable(sfmlAsteroid ${PROJECT_SOURCES})

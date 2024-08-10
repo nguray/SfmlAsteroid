@@ -1,5 +1,7 @@
+#include <SFML/Graphics/Color.hpp>
 #include <math.h>
 #include "Rock.h"
+#include "RVector.h"
 #include <SFML/System/Vector2.hpp>
 
 Rock::Rock(float x,float y,float vx,float vy, float radius):
@@ -21,6 +23,7 @@ void Rock::draw(sf::RenderWindow &window)
 {
     
     m_circle.setPosition(m_pos);
+    m_circle.setFillColor(sf::Color(200,200,0));
     window.draw(m_circle);
 
     sf::VertexArray line(sf::LinesStrip,2);
@@ -84,10 +87,10 @@ void Rock::normalize(sf::Vector2f &v)
     v.y /= n;
 }
 
-sf::Vector2f Rock::computeNormal(sf::Vector2f v)
+RVector Rock::computeNormal(RVector v)
 {
     //-----------------------------------
-    return sf::Vector2f(v.y,-v.x);
+    return RVector(v.y,-v.x);
 }
 
 void Rock::updateUnitVectors()
