@@ -8,7 +8,7 @@ set(PROJECT_SOURCES
         Rock.h Rock.cpp
         Bullet.h Bullet.cpp
         MySprite.h MySprite.cpp
-        RVector.h RVector.cpp
+        RVector2D.h RVector2D.cpp
 )
 
 add_executable(sfmlAsteroid ${PROJECT_SOURCES})

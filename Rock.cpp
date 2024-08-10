@@ -1,7 +1,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <math.h>
 #include "Rock.h"
-#include "RVector.h"
+#include "RVector2D.h"
 #include <SFML/System/Vector2.hpp>
 
 Rock::Rock(float x,float y,float vx,float vy, float radius):
@@ -79,25 +79,10 @@ float Rock::bottom()
     return m_pos.y + m_radius;
 }
 
-void Rock::normalize(sf::Vector2f &v)
-{
-    //-----------------------------------
-    float n = sqrt(v.x*v.x+v.y*v.y);
-    v.x /= n;
-    v.y /= n;
-}
-
-RVector Rock::computeNormal(RVector v)
-{
-    //-----------------------------------
-    return RVector(v.y,-v.x);
-}
-
 void Rock::updateUnitVectors()
 {
    //-----------------------------------
-    m_uv = m_v;
-    normalize(m_uv);
-    m_un = computeNormal(m_uv);
+    m_uv = m_v.unitVector();
+    m_un = m_uv.normalVector();
 
 }

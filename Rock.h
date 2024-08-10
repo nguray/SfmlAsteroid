@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Vector2.hpp>
-#include "RVector.h"
+#include "RVector2D.h"
 
 class Rock {
 public:
@@ -16,16 +16,14 @@ public:
 
     void updatePosition();
     void draw(sf::RenderWindow &window);
-    void normalize(sf::Vector2f &v);
-    RVector computeNormal(RVector v);
     void updateUnitVectors();
 
 
 
-    RVector     m_pos;
-    RVector     m_v;
-    RVector     m_un;
-    RVector     m_uv;
+    RVector2D     m_pos;
+    RVector2D     m_v;
+    RVector2D     m_un;
+    RVector2D     m_uv;
     float       m_radius;
     sf::CircleShape m_circle;
 
