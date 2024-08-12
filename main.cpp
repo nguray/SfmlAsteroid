@@ -110,9 +110,12 @@ int main()
     bool fCollision = false;
 
     RVector2D A(10.0,10.0);
-    RVector2D B(1.0,1.0);
-    RVector2D S;
+    RVector2D B(2.0,2.0);
+    RVector2D S,P;
     S = A-B;
+    P = 5.0f*B;
+
+    float d = A*B;
 
 
     while (window.isOpen())
@@ -129,7 +132,8 @@ int main()
             iTriggerDelay++;
         }
 
-        std::cout << S.x << "," << S.y << std::endl;
+        std::cout << P.x << "," << P.y << std::endl;
+        std::cout << d << std::endl;
         //std::cout << iTriggerDelay << std::endl;
 
         for (auto event = sf::Event{}; window.pollEvent(event);)

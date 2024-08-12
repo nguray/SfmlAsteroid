@@ -27,12 +27,6 @@ RVector2D RVector2D::normalVector()
     return RVector2D( y,-x);
 }
 
-// Dot product
-float RVector2D::operator*(const RVector2D &right)
-{
-    return (x * right.x + y * right.y);
-}
-
 // Distance
 float RVector2D::distance(const RVector2D &a, const RVector2D &b)
 {
