@@ -19,7 +19,6 @@ public:
     void updateUnitVectors();
     bool collision(const Rock &r);
 
-
     RVector2D     m_pos;
     RVector2D     m_v;
     RVector2D     m_un;
@@ -27,6 +26,5 @@ public:
     float         m_mass;
     float         m_radius;
     sf::CircleShape m_circle;
-
 
 };

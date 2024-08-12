@@ -13,6 +13,28 @@ public:
     RVector2D   normalVector();
     float       operator*(const RVector2D &right);
 
+    friend RVector2D operator+(RVector2D A, const RVector2D& B)
+    {
+        return A+=B;
+    }
+
+    RVector2D&  operator+=(const RVector2D& B)
+    {
+        static_cast<sf::Vector2<float>&>(*this) += B;
+        return *this;
+    }
+
+    friend RVector2D operator-(RVector2D A, const RVector2D& B)
+    {
+        return A-=B;
+    }
+
+    RVector2D&  operator-=(const RVector2D& B)
+    {
+        static_cast<sf::Vector2<float>&>(*this) -= B;
+        return *this;
+    }
+
     static float distance(const RVector2D &a, const RVector2D &b);
 
 };

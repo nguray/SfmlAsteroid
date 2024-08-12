@@ -9,7 +9,7 @@
 Rock::Rock(float x,float y,float vx,float vy, float mass):
     m_pos(x,y),m_v(vx,vy),m_mass(mass)
 {
-    m_radius = 10.0*m_mass;
+    m_radius = 20.0*m_mass;
     m_circle.setRadius(m_radius);
     m_circle.setOrigin(sf::Vector2f(m_radius, m_radius));
 

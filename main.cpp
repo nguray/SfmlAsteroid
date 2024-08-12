@@ -8,6 +8,7 @@
 #include <list>
 #include <filesystem>
 #include <iostream>
+#include "RVector2D.h"
 #include "Rock.h"
 #include "Bullet.h"
 #include "MySprite.h"
@@ -108,6 +109,12 @@ int main()
 
     bool fCollision = false;
 
+    RVector2D A(10.0,10.0);
+    RVector2D B(1.0,1.0);
+    RVector2D S;
+    S = A-B;
+
+
     while (window.isOpen())
     {
         elapsed = clock.getElapsedTime();
@@ -122,7 +129,8 @@ int main()
             iTriggerDelay++;
         }
 
-        std::cout << iTriggerDelay << std::endl;
+        std::cout << S.x << "," << S.y << std::endl;
+        //std::cout << iTriggerDelay << std::endl;
 
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
