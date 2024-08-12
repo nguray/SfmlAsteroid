@@ -5,7 +5,7 @@
 
 class Rock {
 public:
-    Rock(float x,float y,float vx,float vy,float radius);
+    Rock(float x,float y,float vx,float vy,float mass);
     ~Rock();
 
     float left();
@@ -17,14 +17,15 @@ public:
     void updatePosition();
     void draw(sf::RenderWindow &window);
     void updateUnitVectors();
-
+    bool collision(const Rock &r);
 
 
     RVector2D     m_pos;
     RVector2D     m_v;
     RVector2D     m_un;
     RVector2D     m_uv;
-    float       m_radius;
+    float         m_mass;
+    float         m_radius;
     sf::CircleShape m_circle;
 
 

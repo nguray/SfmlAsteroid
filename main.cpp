@@ -7,6 +7,7 @@
 #include <math.h>
 #include <list>
 #include <filesystem>
+#include <iostream>
 #include "Rock.h"
 #include "Bullet.h"
 #include "MySprite.h"
@@ -93,16 +94,19 @@ int main()
     sf::Clock clock;
     sf::Time elapsed = clock.restart();
 
-    float a = (float) RandomInt(0, 359);
+    //float a = (float) RandomInt(0, 359);
+    float a = -40.0;
     float vx = 1.8*cos(a*M_PI/180.0);
     float vy = 1.8*sin(a*M_PI/180.0);
-    pRock1 = new Rock( 256.0, 256.0, vx, vy, 10.0);
+    pRock1 = new Rock( 200.0, 256.0, vx, vy, 1.0);
 
-    a = (float) RandomInt(0, 359);
+    //a = (float) RandomInt(0, 359);
+    a = -140.0;
     vx = 2.2*cos(a*M_PI/180.0);
     vy = 2.2*sin(a*M_PI/180.0);
-    pRock2 = new Rock( 256.0, 256.0, vx, vy, 15.0);
+    pRock2 = new Rock( 400.0, 256.0, vx, vy, 1.5);
 
+    bool fCollision = false;
 
     while (window.isOpen())
     {
@@ -117,6 +121,8 @@ int main()
         if (fTrigger){
             iTriggerDelay++;
         }
+
+        std::cout << iTriggerDelay << std::endl;
 
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
@@ -142,12 +148,12 @@ int main()
                     }
                 }else if (event.key.code == sf::Keyboard::V){
                     a = (float) RandomInt(0, 359);
-                    vx = 2.4*cos(a*M_PI/180.0);
-                    vy = 2.4*sin(a*M_PI/180.0);
+                    vx = 1.4*cos(a*M_PI/180.0);
+                    vy = 1.4*sin(a*M_PI/180.0);
                     pRock1->setVelocity( vx, vy);
                     a = (float) RandomInt(0, 359);
-                    vx = 2.4*cos(a*M_PI/180.0);
-                    vy = 2.4*sin(a*M_PI/180.0);
+                    vx = 1.4*cos(a*M_PI/180.0);
+                    vy = 1.4*sin(a*M_PI/180.0);
                     pRock2->setVelocity( vx, vy);
                 }
                 break;
@@ -199,13 +205,19 @@ int main()
         ship.createMask();
         ship.createMaskRect();
 
-        pRock1->updatePosition();
+        if (!fCollision){
+            pRock1->updatePosition();
+            pRock2->updatePosition();
+        }
+
+        fCollision = pRock1->collision(*pRock2);
+
         bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock1);
         pRock1->updateUnitVectors();
 
-        pRock2->updatePosition();
         bounceScreenLimits(1,1,screenWidth-1,screenHeight-1,pRock2);
         pRock2->updateUnitVectors();
+
 
         if (fTrigger){
             if ((iTriggerDelay%24)==0){

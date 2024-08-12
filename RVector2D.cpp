@@ -1,5 +1,6 @@
 
 #include "RVector2D.h"
+#include <SFML/System/Vector2.hpp>
 
 RVector2D::RVector2D(float x, float y):sf::Vector2f(x,y)
 {
@@ -30,4 +31,11 @@ RVector2D RVector2D::normalVector()
 float RVector2D::operator*(const RVector2D &right)
 {
     return (x * right.x + y * right.y);
+}
+
+// Distance
+float RVector2D::distance(const RVector2D &a, const RVector2D &b)
+{
+    auto v = static_cast<sf::Vector2f>(a)-static_cast<sf::Vector2f>(b);
+    return (RVector2D(v.x,v.y).magnitude());
 }
