@@ -37,16 +37,12 @@ public:
 
     friend RVector2D operator*(float left,const RVector2D &right)
     {
-        float x = right.x;
-        float y = right.y;
-        return RVector2D(left*x,left*y);
+        return RVector2D(left*right.x,left*right.y);
     }
 
     friend RVector2D operator*(const RVector2D &left,float right)
     {
-        float x = left.x;
-        float y = left.y;
-        return RVector2D(right*x,right*y);
+        return RVector2D(right*left.x,right*left.y);
     }
 
     // Dot product
@@ -55,7 +51,7 @@ public:
         return A.x*B.x + A.y*B.y;
     }
 
-
+    float distance(const RVector2D &a);
 
     static float distance(const RVector2D &a, const RVector2D &b);
 

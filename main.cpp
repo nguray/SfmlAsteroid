@@ -217,10 +217,11 @@ int main()
         ship.createMask();
         ship.createMaskRect();
 
-        if (!fCollision){
+        //if (!fCollision){
             pRock1->updatePosition();
             pRock2->updatePosition();
-        }
+
+        //}
 
         fCollision = pRock1->collision(*pRock2);
 
@@ -272,6 +273,41 @@ int main()
 
         pRock1->draw(window);
         pRock2->draw(window);
+
+        if ((fCollision)||(true)){
+
+            sf::Vector2f v;
+            sf::VertexArray line(sf::LinesStrip,2);
+            // line[0].position = pRock1->m_pos;
+            // line[0].color = sf::Color::Blue;
+            // v = pRock1->m_pos + pRock1->m_nV12;
+            // line[1].position = v;
+            // line[1].color = sf::Color::Blue;
+            // window.draw(line);
+
+            // sf::VertexArray line1(sf::LinesStrip,2);
+            // line1[0].position = pRock1->m_pos;
+            // line1[0].color = sf::Color::Blue;
+            // v = pRock1->m_pos + pRock1->m_tV12;
+            // line1[1].position = v;
+            // line1[1].color = sf::Color::Blue;
+            // window.draw(line1);
+
+            line[0].position = pRock1->m_pos;
+            line[0].color = sf::Color::Blue;
+            v = pRock1->m_pos + 10.0*pRock1->m_v;
+            line[1].position = v;
+            line[1].color = sf::Color::Blue;
+            window.draw(line);
+
+            line[0].position = pRock2->m_pos;
+            line[0].color = sf::Color::Blue;
+            v = pRock2->m_pos + 10.0*pRock2->m_v;
+            line[1].position = v;
+            line[1].color = sf::Color::Blue;
+            window.draw(line);
+
+        }
 
 
         window.display();

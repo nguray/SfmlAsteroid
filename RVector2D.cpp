@@ -30,6 +30,12 @@ RVector2D RVector2D::normalVector()
 // Distance
 float RVector2D::distance(const RVector2D &a, const RVector2D &b)
 {
-    auto v = static_cast<sf::Vector2f>(a)-static_cast<sf::Vector2f>(b);
-    return (RVector2D(v.x,v.y).magnitude());
+    auto v = a - b;
+    return v.magnitude();
+}
+
+float RVector2D::distance(const RVector2D &a)
+{
+    auto v = *this-a;
+    return v.magnitude();
 }

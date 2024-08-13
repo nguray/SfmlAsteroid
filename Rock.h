@@ -17,7 +17,7 @@ public:
     void updatePosition();
     void draw(sf::RenderWindow &window);
     void updateUnitVectors();
-    bool collision(const Rock &r);
+    bool collision(Rock &r);
 
     RVector2D     m_pos;
     RVector2D     m_v;
@@ -26,5 +26,9 @@ public:
     float         m_mass;
     float         m_radius;
     sf::CircleShape m_circle;
+
+    RVector2D       m_nV12;
+    RVector2D       m_tV12;
+    RVector2D       m_vc;
 
 };
