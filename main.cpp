@@ -80,7 +80,7 @@ int main()
 
     sf::SoundBuffer buffer;
     std::filesystem::path resPath{".."};
-    buffer.loadFromFile(resPath/"344276__nsstudios__laser3.wav");
+    buffer.loadFromFile((resPath/"344276__nsstudios__laser3.wav").string());
     sf::Sound soundLaser;
     soundLaser.setBuffer(buffer);
     soundLaser.setVolume(50.0);

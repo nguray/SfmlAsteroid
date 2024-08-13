@@ -20,9 +20,9 @@ MySprite::MySprite(float x, float y, float a)
     setAngle(a);
     std::filesystem::path resPath{".."};
     //std::cout << resPath/(std::string("Plan00") + ".png") << std::endl;
-    m_Tex0.loadFromFile(resPath/"Plane00.png");
-    m_Tex1.loadFromFile(resPath/"Plane01.png");
-    m_Tex2.loadFromFile(resPath/"Plane02.png");
+    m_Tex0.loadFromFile((resPath/"Plane00.png").string());
+    m_Tex1.loadFromFile((resPath/"Plane01.png").string());
+    m_Tex2.loadFromFile((resPath/"Plane02.png").string());
     setTexture(m_Tex0);
     setOrigin( 15.0f, 16.0f);
 
