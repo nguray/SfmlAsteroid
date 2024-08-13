@@ -1,5 +1,4 @@
-#include "RVector.h"
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.5)
 
 project(sfmlAsteroid VERSION 0.1 LANGUAGES CXX)
 
@@ -14,6 +13,16 @@ set(PROJECT_SOURCES
 add_executable(sfmlAsteroid ${PROJECT_SOURCES})
 
 set(SFML_STATIC_LIBRARIES FALSE)
+
+include(CheckIncludeFileCXX)
+check_include_file_cxx("format" CXX_FORMAT_SUPPORT)
+if (NOT CXX_FORMAT_SUPPORT)
+    find_package(fmt REQUIRED)
+endif()
+
+if (NOT CXX_FORMAT_SUPPORT)
+    target_link_libraries(${PROJECT_NAME} fmt::fmt)
+endif()
 
 find_package(SFML REQUIRED COMPONENTS window graphics system audio)
 

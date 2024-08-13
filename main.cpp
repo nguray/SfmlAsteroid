@@ -7,6 +7,7 @@
 #include <math.h>
 #include <list>
 #include <filesystem>
+#include <fmt/core.h>
 #include <iostream>
 #include "RVector2D.h"
 #include "Rock.h"
@@ -101,7 +102,7 @@ int main()
     float vy = 1.8*sin(a*M_PI/180.0);
     pRock1 = new Rock( 200.0, 256.0, vx, vy, 1.0);
 
-    //a = (float) RandomInt(0, 359);
+    ///a = (float) RandomInt(0, 359);
     a = -140.0;
     vx = 2.2*cos(a*M_PI/180.0);
     vy = 2.2*sin(a*M_PI/180.0);
@@ -109,14 +110,12 @@ int main()
 
     bool fCollision = false;
 
-    RVector2D A(10.0,10.0);
-    RVector2D B(2.0,2.0);
-    RVector2D S,P;
-    S = A-B;
-    P = 5.0f*B;
-
-    float d = A*B;
-
+    // RVector2D A(10.0,10.0);
+    // RVector2D B(2.0,2.0);
+    // RVector2D S,P;
+    // S = A-B;
+    // P = 5.0f*B;
+    // float d = A*B;
 
     while (window.isOpen())
     {
@@ -132,13 +131,14 @@ int main()
             iTriggerDelay++;
         }
 
-        std::cout << P.x << "," << P.y << std::endl;
-        std::cout << d << std::endl;
+        // std::cout << P.x << "," << P.y << std::endl;
+        // std::cout << d << std::endl;
         //std::cout << iTriggerDelay << std::endl;
 
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
-            switch(event.type){
+     #include <fmt/core.h>
+       switch(event.type){
             case sf::Event::Closed:
                 window.close();
                 break;
@@ -306,6 +306,13 @@ int main()
             line[1].position = v;
             line[1].color = sf::Color::Blue;
             window.draw(line);
+
+            float e1 = 0.5*pRock1->m_mass*pRock1->m_v*pRock1->m_v;
+            float e2 = 0.5*pRock2->m_mass*pRock2->m_v*pRock2->m_v;
+
+            std::cout << fmt::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
+            //fmt::print("{}+{}={}\n", e1,e2,e1+e2);
+
 
         }
 
