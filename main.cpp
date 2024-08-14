@@ -7,7 +7,7 @@
 #include <math.h>
 #include <list>
 #include <filesystem>
-#include <fmt/core.h>
+#include <format>
 #include <iostream>
 #include "RVector2D.h"
 #include "Rock.h"
@@ -137,8 +137,7 @@ int main()
 
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
-     #include <fmt/core.h>
-       switch(event.type){
+            switch(event.type){
             case sf::Event::Closed:
                 window.close();
                 break;
@@ -310,7 +309,7 @@ int main()
             float e1 = 0.5*pRock1->m_mass*pRock1->m_v*pRock1->m_v;
             float e2 = 0.5*pRock2->m_mass*pRock2->m_v*pRock2->m_v;
 
-            std::cout << fmt::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
+            std::cout << std::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
             //fmt::print("{}+{}={}\n", e1,e2,e1+e2);
 
 
