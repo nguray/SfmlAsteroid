@@ -6,7 +6,7 @@
 #include <cmath>
 #include <list>
 #include <filesystem>
-#include <fmt/format.h>
+#include <fmt/core.h>
 #include <iostream>
 #include "RVector2D.h"
 #include "Rock.h"
