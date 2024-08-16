@@ -304,11 +304,11 @@ int main()
             std::cout << fmt::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
             //fmt::print("{}+{}={}\n", e1,e2,e1+e2);
 
-
         }
 
 
         window.display();
+        
     }
 
     //-- Free remaining bullets
