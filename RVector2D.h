@@ -1,5 +1,4 @@
 #pragma once
-#include <iterator>
 #include <math.h>
 #include <SFML/System/Vector2.hpp>
 

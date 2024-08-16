@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(sfmlAsteroid VERSION 0.1 LANGUAGES CXX)
 
+set (CMAKE_CXX_STANDARD 20)
+
 set(PROJECT_SOURCES
         main.cpp
         Rock.h Rock.cpp

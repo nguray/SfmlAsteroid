@@ -4,10 +4,9 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <cmath>
-#include <math.h>
 #include <list>
 #include <filesystem>
-#include <format>
+#include <fmt/format.h>
 #include <iostream>
 #include "RVector2D.h"
 #include "Rock.h"
@@ -61,7 +60,7 @@ sf::Vector2f computeNormal(sf::Vector2f v)
 int main()
 {
 
-    bool        fTrigger = false;
+    auto        fTrigger {false};
     int         iTriggerDelay = 0;
     std::list<Bullet *> list_bullets;
 
@@ -97,7 +96,7 @@ int main()
     sf::Time elapsed = clock.restart();
 
     //float a = (float) RandomInt(0, 359);
-    float a = -40.0;
+    auto a {-40.0};
     float vx = 1.8*cos(a*M_PI/180.0);
     float vy = 1.8*sin(a*M_PI/180.0);
     pRock1 = new Rock( 200.0, 256.0, vx, vy, 1.0);
@@ -108,14 +107,7 @@ int main()
     vy = 2.2*sin(a*M_PI/180.0);
     pRock2 = new Rock( 400.0, 256.0, vx, vy, 1.5);
 
-    bool fCollision = false;
-
-    // RVector2D A(10.0,10.0);
-    // RVector2D B(2.0,2.0);
-    // RVector2D S,P;
-    // S = A-B;
-    // P = 5.0f*B;
-    // float d = A*B;
+    auto fCollision {false};
 
     while (window.isOpen())
     {
@@ -309,7 +301,7 @@ int main()
             float e1 = 0.5*pRock1->m_mass*pRock1->m_v*pRock1->m_v;
             float e2 = 0.5*pRock2->m_mass*pRock2->m_v*pRock2->m_v;
 
-            std::cout << std::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
+            std::cout << fmt::format("{}+{}={}\n", e1,e2,e1+e2) << std::endl;
             //fmt::print("{}+{}={}\n", e1,e2,e1+e2);
 
 
