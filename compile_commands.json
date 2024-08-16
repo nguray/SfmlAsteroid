@@ -1,0 +1,32 @@
+[
+{
+  "directory": "D:/VcCppProjects/SfmlAsteroid/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_SHARED  -g -std=gnu++20 -o CMakeFiles\\sfmlAsteroid.dir\\main.cpp.obj -c D:\\VcCppProjects\\SfmlAsteroid\\main.cpp",
+  "file": "D:/VcCppProjects/SfmlAsteroid/main.cpp",
+  "output": "CMakeFiles/sfmlAsteroid.dir/main.cpp.obj"
+},
+{
+  "directory": "D:/VcCppProjects/SfmlAsteroid/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_SHARED  -g -std=gnu++20 -o CMakeFiles\\sfmlAsteroid.dir\\Rock.cpp.obj -c D:\\VcCppProjects\\SfmlAsteroid\\Rock.cpp",
+  "file": "D:/VcCppProjects/SfmlAsteroid/Rock.cpp",
+  "output": "CMakeFiles/sfmlAsteroid.dir/Rock.cpp.obj"
+},
+{
+  "directory": "D:/VcCppProjects/SfmlAsteroid/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_SHARED  -g -std=gnu++20 -o CMakeFiles\\sfmlAsteroid.dir\\Bullet.cpp.obj -c D:\\VcCppProjects\\SfmlAsteroid\\Bullet.cpp",
+  "file": "D:/VcCppProjects/SfmlAsteroid/Bullet.cpp",
+  "output": "CMakeFiles/sfmlAsteroid.dir/Bullet.cpp.obj"
+},
+{
+  "directory": "D:/VcCppProjects/SfmlAsteroid/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_SHARED  -g -std=gnu++20 -o CMakeFiles\\sfmlAsteroid.dir\\MySprite.cpp.obj -c D:\\VcCppProjects\\SfmlAsteroid\\MySprite.cpp",
+  "file": "D:/VcCppProjects/SfmlAsteroid/MySprite.cpp",
+  "output": "CMakeFiles/sfmlAsteroid.dir/MySprite.cpp.obj"
+},
+{
+  "directory": "D:/VcCppProjects/SfmlAsteroid/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_SHARED  -g -std=gnu++20 -o CMakeFiles\\sfmlAsteroid.dir\\RVector2D.cpp.obj -c D:\\VcCppProjects\\SfmlAsteroid\\RVector2D.cpp",
+  "file": "D:/VcCppProjects/SfmlAsteroid/RVector2D.cpp",
+  "output": "CMakeFiles/sfmlAsteroid.dir/RVector2D.cpp.obj"
+}
+]
